@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: exchange-generator
+  config:
+    import: "optional:consul:"
+  cloud:
+    consul:
+      discovery:
+        health-check-path: /actuator/health
+        health-check-interval: 10s
+      config:
+        enabled: true
+        prefixes: [config]
+        format: YAML
+        defaultContext: application
+      scheme: http
+      host: yandex-sprint-10-consul
+      port: 8500
+  security:
+    oauth2:
+      client:
+        registration:
+          bank-services-cc:
+            provider: keycloak
+            client-id: ${YANDEX_SPRINT_10_KEYCLOAK_INTERNAL_CALL_CLIENT_ID}
+            client-secret: ${YANDEX_SPRINT_10_KEYCLOAK_INTERNAL_CALL_CLIENT_SECRET}
+            authorization-grant-type: client_credentials
+        provider:
+          keycloak:
+            token-uri: http://yandex-sprint-10-keycloak:8080/realms/${YANDEX_SPRINT_10_KEYCLOAK_REALM}/protocol/openid-connect/token
+
+clients:
+  exchange-service:
+    url: "http://yandex-sprint-10-exchange:8080"
+
+application:
+  scheduling:
+    enable: true
