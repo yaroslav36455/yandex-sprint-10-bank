@@ -2,6 +2,7 @@ package by.tyv.exchange.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -15,19 +16,10 @@ public class SecurityConfiguration {
         return httpSecurity
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchange -> exchange
-                        .pathMatchers("/api/rates", "/actuator/health/readiness").permitAll()
+                        .pathMatchers(HttpMethod.GET, "/actuator/health/**").permitAll()
+                        .pathMatchers("/api/rates").permitAll()
                         .anyExchange().hasAuthority("SCOPE_internal_call"))
                 .oauth2ResourceServer(spec -> spec.jwt(Customizer.withDefaults()))
                 .build();
     }
-
-//    @Bean
-//    public Converter<Jwt, Mono<AbstractAuthenticationToken>> jwtConverter() {
-//        var scopes = new JwtGrantedAuthoritiesConverter();
-//        scopes.setAuthorityPrefix("SCOPE_");
-//        scopes.setAuthoritiesClaimName("scope");
-//        var c = new JwtAuthenticationConverter();
-//        c.setJwtGrantedAuthoritiesConverter(scopes);
-//        return new ReactiveJwtAuthenticationConverterAdapter(c);
-//    }
 }

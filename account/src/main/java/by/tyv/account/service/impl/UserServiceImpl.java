@@ -26,6 +26,7 @@ import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -197,7 +198,10 @@ public class UserServiceImpl implements UserService {
                                     .map(AccountEntity::getCurrency)
                                     .toList();
 
-                            List<AccountEntity> accountsToCreate = editAccounts.getAccounts().stream()
+                            List<CurrencyCode> newCurrencies = Objects.isNull(editAccounts.getAccounts())
+                                    ? new ArrayList<>()
+                                    : editAccounts.getAccounts();
+                            List<AccountEntity> accountsToCreate = newCurrencies.stream()
                                     .filter(Predicate.not(oldCurrencyList::contains))
                                     .map(currencyCode -> new AccountEntity()
                                             .setUserId(userEntity.getId())
@@ -205,7 +209,7 @@ public class UserServiceImpl implements UserService {
                                             .setBalance(BigDecimal.ZERO))
                                     .toList();
                             List<AccountEntity> accountsToRemove = oldAccountEntities.stream()
-                                    .filter(Predicate.not(accountEntity -> editAccounts.getAccounts().contains(accountEntity.getCurrency())))
+                                    .filter(Predicate.not(accountEntity -> newCurrencies.contains(accountEntity.getCurrency())))
                                     .toList();
 
                             return accountRepository.deleteAll(accountsToRemove)

@@ -73,3 +73,15 @@ application:
   r2dbc:
     auditing:
       enable: true
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true   # даёт /actuator/health/readiness и /liveness
+      show-details: when_authorized

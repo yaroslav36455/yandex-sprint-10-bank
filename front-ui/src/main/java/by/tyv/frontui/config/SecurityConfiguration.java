@@ -28,7 +28,7 @@ public class SecurityConfiguration {
     public SecurityWebFilterChain webFilterChain(ServerHttpSecurity httpSecurity) {
         return httpSecurity.csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchange -> exchange
-                        .pathMatchers(HttpMethod.GET, "/", "/signup").permitAll()
+                        .pathMatchers(HttpMethod.GET, "/", "/signup", "/actuator/health/**").permitAll()
                         .pathMatchers(HttpMethod.POST, "/signup").permitAll()
                         .pathMatchers(HttpMethod.GET, "/main").hasAuthority("SCOPE_user")
                         .pathMatchers(HttpMethod.POST, "/user/**").hasAuthority("SCOPE_user")
@@ -36,16 +36,6 @@ public class SecurityConfiguration {
                 .oauth2ResourceServer(spec -> spec.jwt(Customizer.withDefaults()))
                 .build();
     }
-
-//    @Bean
-//    public Converter<Jwt, Mono<AbstractAuthenticationToken>> jwtConverter() {
-//        var scopes = new JwtGrantedAuthoritiesConverter();
-//        scopes.setAuthorityPrefix("SCOPE_");
-//        scopes.setAuthoritiesClaimName("scope");
-//        var c = new JwtAuthenticationConverter();
-//        c.setJwtGrantedAuthoritiesConverter(scopes);
-//        return new ReactiveJwtAuthenticationConverterAdapter(c);
-//    }
 
     @Bean
     public ReactiveOAuth2AuthorizedClientManager authorizedClientManager(ReactiveClientRegistrationRepository regs,

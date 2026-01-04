@@ -34,3 +34,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+bank-umbrella-chart/Chart.lock
+bank-umbrella-chart/charts/*.tgz

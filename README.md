@@ -36,46 +36,26 @@
 
 ## Требования
 * Docker 28.2.x
+* Minikube v1.37.0
 
-## 1) Сборка
+## 1) Сборка Linux
 
 ### Linux:
 ```bash
 gradle build
+minikube start
+kubectl create configmap -n dev keycloak-import --from-file=./keycloak/import
+helm dependency build ./bank-umbrella-chart
+./build.sh
+helm install bank-dev ./bank-umbrella-chart -f ./bank-umbrella-chart/dev-values.yaml -n dev
+sudo sh -c "echo \"$(minikube ip) gateway.local keycloak.local\" >> /etc/hosts"
 ```
 
-_Если отсутствует Gradle в системе, то вызывать `./gradlew` вместо `gradle`_.
-
-### Если контейнер Keycloak запускается локально, то необходимо добавить маппинг IP-адресов:
-Файл `/etc/hosts`
-```bash
-127.0.0.1 yandex-sprint-8-keycloak
-```
-
-### Windows:
-```bash
-gradle build
-```
-
-### Если контейнер Keycloak запускается локально, то необходимо добавить маппинг IP-адресов:
-Файл `C:\Windows\System32\drivers\etc\hosts`
-```bash
-127.0.0.1 yandex-sprint-8-keycloak
-```
+##### Для обращения в приложение следует использовать url http://gateway.local
+##### Для обращения в keycloak следует использовать url http://keycloak.local
 
 
-## 2) Настройка Keycloak
-
-Сервис запускается на localhost:8080
-login:admin
-password:admin
-(параметры можно переопределить в файле `.env`)
-Для работы сервисов необходимо создать в realm c именем bank-realm (имя можно переопределить в переменной `YANDEX_SPRINT_10_KEYCLOAK_REALM`) три клиента.
-
-```bash
-docker compose up --build yandex-sprint-10-keycloak
-```
-
+### В Keycloak создаются предварительно следующие клиенты:
 #### 1. Клиент для межсервисного общения (технический токен)
 * Client ID = service-client-id
 * Client authentication = ON
@@ -96,15 +76,6 @@ docker compose up --build yandex-sprint-10-keycloak
 * Client ID = user-client-id
 * Client authentication = OFF
 * Standard flow = ON
-* Valid redirect URIs = http://localhost:9090/login/oauth2/code/user-token-ac
-* Valid post logout redirect URIs = http://localhost:9090/
+* Valid redirect URIs = http://gateway.local/login/oauth2/code/user-token-ac
+* Valid post logout redirect URIs = http://gateway.local/
 * Создать Client Scope с именем `user`, указав ему в настройках `Include in token scope=ON` и добавить его этому клиенту
-
-**!!! В файле `.env` можно переопределить некоторые другие переменные такие как логины и пароли к базе.**
-
-
-## Запуск
-
-```bash
-docker compose up --build
-```

@@ -36,22 +36,12 @@ public class SecurityConfiguration {
         return httpSecurity
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchange -> exchange
+                        .pathMatchers(HttpMethod.GET, "/actuator/health/**").permitAll()
                         .pathMatchers(HttpMethod.POST, "/signup").permitAll()
                         .anyExchange().hasAuthority("SCOPE_internal_call"))
                 .oauth2ResourceServer(spec -> spec.jwt(Customizer.withDefaults()))
                 .build();
     }
-
-//    @Bean
-//    public Converter<Jwt, Mono<AbstractAuthenticationToken>> jwtConverter() {
-//        var scopes = new JwtGrantedAuthoritiesConverter();
-//        scopes.setAuthorityPrefix("SCOPE_");
-//        scopes.setAuthoritiesClaimName("scope");
-//        var c = new JwtAuthenticationConverter();
-//        c.setJwtGrantedAuthoritiesConverter(scopes);
-//        return new ReactiveJwtAuthenticationConverterAdapter(c);
-//    }
-
 
     @Bean
     public ReactiveOAuth2AuthorizedClientManager authorizedClientManager(ReactiveClientRegistrationRepository regs,
