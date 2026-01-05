@@ -86,3 +86,8 @@ sudo sh -c "echo \"$(minikube ip) gateway.local keycloak.local\" >> /etc/hosts"
 helm lint ./bank-umbrella-chart -f ./bank-umbrella-chart/dev-values.yaml
 helm test bank-dev -n dev --logs
 ```
+
+## Информация
+```bash
+kubectl get pods,svc,ingress -n dev
+```
