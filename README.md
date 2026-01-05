@@ -82,5 +82,7 @@ sudo sh -c "echo \"$(minikube ip) gateway.local keycloak.local\" >> /etc/hosts"
 * Создать Client Scope с именем `user`, указав ему в настройках `Include in token scope=ON` и добавить его этому клиенту
 
 ## Тесты
+```bash
 helm lint ./bank-umbrella-chart -f ./bank-umbrella-chart/dev-values.yaml
 helm test bank-dev -n dev --logs
+```
