@@ -37,6 +37,7 @@
 ## Требования
 * Docker 28.2.x
 * Minikube v1.37.0
+* Helm v4.0.1
 
 ## 1) Сборка Linux
 
@@ -79,3 +80,7 @@ sudo sh -c "echo \"$(minikube ip) gateway.local keycloak.local\" >> /etc/hosts"
 * Valid redirect URIs = http://gateway.local/login/oauth2/code/user-token-ac
 * Valid post logout redirect URIs = http://gateway.local/
 * Создать Client Scope с именем `user`, указав ему в настройках `Include in token scope=ON` и добавить его этому клиенту
+
+## Тесты
+helm lint ./bank-umbrella-chart -f ./bank-umbrella-chart/dev-values.yaml
+helm test bank-dev -n dev --logs
