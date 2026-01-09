@@ -4,15 +4,6 @@ global:
     port: "8080"
     realm: "bank-realm"
 
-secrets:
-  keycloakAdminPassword: "admin"
-  internalClientSecret: "0AU6T8CNGErz3mRskLiJ2u5Mtdud1iqz"
-  userManagementClientSecret: "TleHPOuxA2JvlmhXmexYFCjgxDE4ZkIJ"
-  accountDbPassword: "pass"
-  cashDbPassword: "pass"
-  transferDbPassword: "pass"
-  exchangeDbPassword: "pass"
-
 account-postgres:
   image:
     tag: "latest"
