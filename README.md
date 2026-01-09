@@ -43,7 +43,8 @@
 ### Linux:
 ```bash
 gradle build
-minikube start
+minikube start --cpus=4 --memory=8192
+kubectl create namespace dev
 kubectl create configmap -n dev keycloak-import --from-file=./keycloak/import
 helm dependency build ./bank-umbrella-chart
 ./build.sh
@@ -89,4 +90,6 @@ helm test bank-dev -n dev --logs
 ## Информация
 ```bash
 kubectl get pods,svc,ingress -n dev
+kubectl logs -n dev pod/<название пода> --tail=200
+kubectl describe node minikube
 ```

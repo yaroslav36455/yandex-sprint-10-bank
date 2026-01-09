@@ -142,6 +142,13 @@ account:
     pullPolicy: IfNotPresent
   service:
     port: 8080
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
   env:
     YANDEX_SPRINT_10_ACCOUNT_POSTGRES_DB_PORT: "5432"
     YANDEX_SPRINT_10_ACCOUNT_POSTGRES_DB_NAME: "db_account"
@@ -171,6 +178,13 @@ blocker:
     pullPolicy: IfNotPresent
   service:
     port: 8080
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
   env:
     YANDEX_SPRINT_10_KEYCLOAK_REALM: "bank-realm"
   probes:
@@ -188,6 +202,13 @@ cash:
     pullPolicy: IfNotPresent
   service:
     port: 8080
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
   env:
     YANDEX_SPRINT_10_CASH_POSTGRES_DB_PORT: "5432"
     YANDEX_SPRINT_10_CASH_POSTGRES_DB_NAME: "db_cash"
@@ -214,6 +235,13 @@ exchange:
     pullPolicy: IfNotPresent
   service:
     port: 8080
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
   env:
     YANDEX_SPRINT_10_EXCHANGE_POSTGRES_DB_PORT: "5432"
     YANDEX_SPRINT_10_EXCHANGE_POSTGRES_DB_NAME: "db_exchange"
@@ -237,6 +265,13 @@ exchange-generator:
     pullPolicy: IfNotPresent
   service:
     port: 8080
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
   env:
     YANDEX_SPRINT_10_KEYCLOAK_REALM: "bank-realm"
     YANDEX_SPRINT_10_KEYCLOAK_INTERNAL_CALL_CLIENT_ID: "service-client-id"
@@ -258,6 +293,13 @@ front-ui:
     pullPolicy: IfNotPresent
   service:
     port: 8080
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
   env:
     YANDEX_SPRINT_10_KEYCLOAK_REALM: "bank-realm"
     YANDEX_SPRINT_10_KEYCLOAK_INTERNAL_CALL_CLIENT_ID: "service-client-id"
@@ -279,6 +321,13 @@ gateway:
     pullPolicy: IfNotPresent
   service:
     port: 9090
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
   env:
     YANDEX_SPRINT_10_KEYCLOAK_REALM: "bank-realm"
     YANDEX_SPRINT_10_KEYCLOAK_INTERNAL_CALL_CLIENT_ID: "service-client-id"
@@ -301,6 +350,13 @@ notification:
     pullPolicy: IfNotPresent
   service:
     port: 8080
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
   env:
     YANDEX_SPRINT_10_KEYCLOAK_REALM: "bank-realm"
   probes:
@@ -318,6 +374,13 @@ transfer:
     pullPolicy: IfNotPresent
   service:
     port: 8080
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
   env:
     YANDEX_SPRINT_10_TRANSFER_POSTGRES_DB_PORT: "5432"
     YANDEX_SPRINT_10_TRANSFER_POSTGRES_DB_NAME: "db_transfer"
