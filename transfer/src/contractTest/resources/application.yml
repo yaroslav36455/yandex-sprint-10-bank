@@ -5,10 +5,6 @@ application:
 spring:
   cloud:
     config.import-check.enabled: false
-    consul:
-      enabled: false
-      config:
-        enabled: false
   liquibase.enabled: false
   autoconfigure.exclude:
     - org.springframework.boot.autoconfigure.r2dbc.R2dbcAutoConfiguration

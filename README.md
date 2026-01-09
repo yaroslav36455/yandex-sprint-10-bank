@@ -20,7 +20,6 @@
 #### Приложение работает в Docker контейнерах следующих образов
 * yandex-sprint-10-gateway
 * yandex-sprint-10-keycloak
-* yandex-sprint-10-consul
 * yandex-sprint-10-account
 * yandex-sprint-10-blocker
 * yandex-sprint-10-cash
@@ -39,7 +38,7 @@
 * Minikube v1.37.0
 * Helm v4.0.1
 
-## 1) Сборка Linux
+## Сборка Linux
 
 ### Linux:
 ```bash

@@ -16,11 +16,6 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
-  cloud:
-    consul:
-      enabled: false
-      config:
-        enabled: false
   security:
     oauth2:
       client:

@@ -1,8 +1,6 @@
 spring:
   application:
     name: transfer
-  config:
-    import: "optional:consul:"
   r2dbc:
     url: r2dbc:postgresql://yandex-sprint-10-transfer-postgres:${YANDEX_SPRINT_10_TRANSFER_POSTGRES_DB_PORT}/${YANDEX_SPRINT_10_TRANSFER_POSTGRES_DB_NAME}
     username: ${YANDEX_SPRINT_10_TRANSFER_POSTGRES_DB_USER_NAME}
@@ -24,19 +22,6 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: validate
-  cloud:
-    consul:
-      discovery:
-        health-check-path: /actuator/health
-        health-check-interval: 10s
-      config:
-        enabled: true
-        prefixes: [ config ]
-        format: YAML
-        defaultContext: application
-      scheme: http
-      host: yandex-sprint-10-consul
-      port: 8500
   security:
     oauth2:
       client:

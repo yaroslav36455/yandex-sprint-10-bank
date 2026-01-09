@@ -131,15 +131,6 @@ keycloak:
         - name: realm-import-tmp
           mountPath: /opt/bitnami/keycloak/data/import
 
-consul:
-  k8sName: yandex-sprint-10-consul
-  image:
-    repository: hashicorp/consul
-    tag: "1.21.4"
-    pullPolicy: IfNotPresent
-  service:
-    port: 8500
-
 
 
 account:
