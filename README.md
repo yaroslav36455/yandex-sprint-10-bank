@@ -44,6 +44,7 @@
 ```bash
 gradle build
 minikube start --cpus=4 --memory=8192
+minikube addons enable ingress
 kubectl create namespace dev
 kubectl create configmap -n dev keycloak-import --from-file=./keycloak/import
 helm dependency build ./bank-umbrella-chart
